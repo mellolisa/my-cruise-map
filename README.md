@@ -42,3 +42,12 @@ You don’t have to ever use `eject`. The curated feature set is suitable for sm
 You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
 
 To learn React, check out the [React documentation](https://reactjs.org/).
+
+Sidebar Functionality
+https://www.cssscript.com/off-canvas-side-nav-with-adaptive-main-content/
+
+Load Map
+https://hackernoon.com/implement-google-maps-in-reactjs-5bc218074689
+
+Google-map-react Library
+https://github.com/google-map-react
