@@ -1,20 +1,33 @@
 import React, { Component } from "react";
 import Sidebar from "./components/Sidebar.js";
 import "./App.css";
-import SimpleMap from "./components/Map.js";
+import locations from "./data/locations.json";
+import CruiseMap from "./components/CruiseMap.js";
 
 class App extends Component {
+  state = {
+    center: {
+      lat: 20.351,
+      lon: -70.021
+    },
+    zoom: 5,
+    all: locations
+  };
+
   render() {
     return (
       <div className="App">
         <Sidebar />
-        {/* Main Page */}{" "}
-        <div className="main">
+        {/* Main Page */}
+        <main className="main">
           <section id="map">
-            <SimpleMap />
-          </section>{" "}
-          />
-        </div>{" "}
+            <CruiseMap
+              center={this.state.center}
+              zoom={this.state.zoom}
+              locations={this.state.all}
+            />
+          </section>
+        </main>
       </div>
     );
   }

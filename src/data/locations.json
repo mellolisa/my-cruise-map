@@ -1,0 +1,16 @@
+{
+    "day1port": {
+        "name": "Fort Lauderdale",
+        "position": {
+            "lat": 6.1412497,
+            "lng": -80.2156073
+        }
+    },
+    "day2port": {
+        "name": "Location 2",
+        "position": {
+            "lat": 6.1412497,
+            "lng": -80.2156073
+        }
+    }
+}
