@@ -1,27 +1,30 @@
 import React, { Component } from "react";
 import GoogleMapReact from "google-map-react";
 import mapstyle from "../data/mapstyle.json";
+import { library } from "@fortawesome/fontawesome-svg-core";
+import { fab } from "@fortawesome/free-brands-svg-icons";
+import { faMapMarker } from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
-const LocationMarkerComponent = ({ text }) => <div> {text} </div>;
+library.add(fab, faMapMarker);
+const LocationMarkerComponent = ({ text }) => (
+  <div>
+    {" "}
+    <FontAwesomeIcon className="map-icon fa-3x" icon="map-marker" />
+  </div>
+);
 const mapOptions = {
-  styles: mapstyle
+  styles: mapstyle,
+  mapTypeId: "terrain"
 };
 
 class CruiseMap extends Component {
-  static defaultProps = {
-    center: {
-      lat: 20.351,
-      lng: -70.021
-    },
-    zoom: 5
-  };
-
   render() {
     return (
       // Important! Always set the container height explicitly
       <div
         style={{
-          height: "100%",
+          height: "100vh",
           width: "100%"
         }}
       >
@@ -29,8 +32,8 @@ class CruiseMap extends Component {
           bootstrapURLKeys={{
             key: "AIzaSyDD48Kq168GX4Ok_CncdLtgIRtvFIiwle0"
           }}
-          defaultCenter={{ lat: 20.351, lng: -70.021 }}
-          defaultZoom={5}
+          defaultCenter={{ lat: 28.204497, lng: -69.825955 }}
+          defaultZoom={4}
           options={mapOptions}
         >
           <LocationMarkerComponent

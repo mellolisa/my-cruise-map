@@ -75,7 +75,6 @@ nav,
 /* Main */
 
 .main {
-    background-color: lightskyblue;
     -webkit-transition: margin-left .3s;
     transition: margin-left .3s;
 }
@@ -89,4 +88,12 @@ section {
     height: 100vh;
     line-height: 100vh;
     text-align: center;
+}
+
+
+/* Map Icons */
+
+.map-icon {
+    color: fuchsia;
+    -webkit-text-stroke-color: black;
 }
