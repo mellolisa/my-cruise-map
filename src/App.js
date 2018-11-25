@@ -11,23 +11,30 @@ class App extends Component {
       lon: -70.021
     },
     zoom: 5,
-    all: locations
+    locations: locations
   };
+
+  getLocations() {
+    this.setState({ locations });
+  }
+
+  componentDidMount() {
+    this.getLocations();
+  }
 
   render() {
     return (
       <div className="App">
-        <Sidebar />
-        {/* Main Page */}
+        <Sidebar /> {/* Main Page */}{" "}
         <main className="main">
           <section id="map">
             <CruiseMap
               center={this.state.center}
               zoom={this.state.zoom}
-              locations={this.state.all}
-            />
-          </section>
-        </main>
+              locations={this.state.locations}
+            />{" "}
+          </section>{" "}
+        </main>{" "}
       </div>
     );
   }
