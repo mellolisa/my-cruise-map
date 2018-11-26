@@ -8,7 +8,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 library.add(fab, faMapMarker);
 const LocationMarkerComponent = ({ key }) => (
-  <div key={key}>
+  <div key={key} className="marker-text">
     <FontAwesomeIcon className="map-icon fa-3x" icon="map-marker" />
   </div>
 );

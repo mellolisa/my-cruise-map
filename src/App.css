@@ -94,7 +94,10 @@ section {
 /* Map Icons */
 
 .map-icon {
+    transform: translate(-13px, -33px);
     color: fuchsia;
+    width: 100%;
+    height: auto;
     stroke: black;
     stroke-width: 10;
 }
