@@ -12,6 +12,7 @@ const LocationMarkerComponent = ({ key }) => (
     <FontAwesomeIcon className="map-icon fa-3x" icon="map-marker" />
   </div>
 );
+
 const mapOptions = {
   styles: mapstyle,
   mapTypeId: "terrain"
@@ -20,6 +21,25 @@ const mapOptions = {
 class CruiseMap extends Component {
   state = {
     locations: this.props.locations
+  };
+
+  onGoogleApiLoaded = ({ map, maps }) => {
+    this.map = map;
+    this.maps = maps;
+    let windowContent = "";
+    this.infowindow = new this.maps.InfoWindow({
+      content: windowContent,
+      maxWidth: 200
+    });
+    console.log(this);
+  };
+
+  _onChildClick = (key, childProps) => {
+    console.log(this);
+    let windowContent =
+      "<div>" + "Day " + key + " - " + childProps.location.name + "</div>";
+    this.infowindow.setContent(windowContent);
+    this.infowindow.open(this, childProps);
   };
 
   getLocations(locations) {
@@ -44,12 +64,15 @@ class CruiseMap extends Component {
           bootstrapURLKeys={{
             key: "AIzaSyDD48Kq168GX4Ok_CncdLtgIRtvFIiwle0"
           }}
+          onGoogleApiLoaded={this.onGoogleApiLoaded}
           defaultCenter={{
             lat: 27.504497,
             lng: -69.825955
           }}
           defaultZoom={4.8}
           options={mapOptions}
+          yesIWantToUseGoogleMapApiInternals={true}
+          onChildClick={this._onChildClick}
         >
           {this.state.locations.map(location => (
             <LocationMarkerComponent
@@ -57,10 +80,10 @@ class CruiseMap extends Component {
               lat={location.position.lat}
               lng={location.position.lng}
               text={location.name}
+              location={location}
             />
           ))}
         </GoogleMapReact>
-        / >
       </div>
     );
   }

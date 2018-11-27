@@ -25,7 +25,7 @@ class App extends Component {
   render() {
     return (
       <div className="App">
-        <Sidebar /> {/* Main Page */}{" "}
+        <Sidebar locations={this.state.locations} /> {/* Main Page */}{" "}
         <main className="main">
           <section id="map">
             <CruiseMap
