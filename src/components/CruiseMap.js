@@ -23,7 +23,9 @@ const mapOptions = {
 class CruiseMap extends Component {
   state = {
     locations: this.props.locations,
-    isOpen: false
+    isOpen: false,
+    selectedDay: 1,
+    selectedLocation: this.props.locations[0]
   };
 
   onGoogleApiLoaded = ({ map, maps }) => {
@@ -32,11 +34,19 @@ class CruiseMap extends Component {
     console.log(this);
   };
 
-  handleToggleOpen = event => {
-    this.setState({
-      isOpen: true
-    });
-    console.log(event);
+  _onChildClick = key => {
+    key = parseInt(key);
+    if (key !== -1) {
+      this.selectLocation(key);
+      console.log(key);
+      console.log(this.state.selectedLocation);
+      this.setState({
+        isOpen: true,
+        selectedDay: key
+      });
+    } else {
+      this.setState({ isOpen: false });
+    }
   };
 
   handleToggleClose = () => {
@@ -44,6 +54,22 @@ class CruiseMap extends Component {
       isOpen: false
     });
   };
+
+  selectLocation(day) {
+    day = parseInt(day);
+    if (day) {
+      let location = this.state.locations.filter(
+        location => location.day === day
+      );
+      console.log(this.state.locations[6].day);
+      console.log(day);
+      if (location.length > 0) {
+        this.setState({
+          selectedLocation: location
+        });
+      }
+    }
+  }
 
   getLocations(locations) {
     this.setState({
@@ -77,7 +103,7 @@ class CruiseMap extends Component {
           defaultZoom={4.8}
           options={mapOptions}
           yesIWantToUseGoogleMapApiInternals={true}
-          onChildClick={event => this.handleToggleOpen()}
+          onChildClick={this._onChildClick}
         >
           {this.state.locations.map(location => (
             <LocationMarkerComponent
@@ -91,10 +117,11 @@ class CruiseMap extends Component {
           ))}
           {this.state.isOpen === true ? (
             <InfoBox
+              key={-1}
               onClick={() => this.handleToggleClose()}
-              lat={this.state.locations[0].position.lat}
-              lng={this.state.locations[0].position.lng}
-              text={this.state.locations[0].name}
+              lat={this.state.selectedLocation.position.lat}
+              lng={this.state.selectedLocation.position.lng}
+              text={this.state.selectedLocation.name}
               type="infobox"
             />
           ) : null}
