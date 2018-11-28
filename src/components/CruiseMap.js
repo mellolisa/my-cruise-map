@@ -13,6 +13,8 @@ const LocationMarkerComponent = ({ key }) => (
   </div>
 );
 
+const InfoBox = () => <div>Hi ho!</div>;
+
 const mapOptions = {
   styles: mapstyle,
   mapTypeId: "terrain"
@@ -20,30 +22,33 @@ const mapOptions = {
 
 class CruiseMap extends Component {
   state = {
-    locations: this.props.locations
+    locations: this.props.locations,
+    isOpen: false
   };
 
   onGoogleApiLoaded = ({ map, maps }) => {
     this.map = map;
     this.maps = maps;
-    let windowContent = "";
-    this.infowindow = new this.maps.InfoWindow({
-      content: windowContent,
-      maxWidth: 200
-    });
     console.log(this);
   };
 
-  _onChildClick = (key, childProps) => {
-    console.log(this);
-    let windowContent =
-      "<div>" + "Day " + key + " - " + childProps.location.name + "</div>";
-    this.infowindow.setContent(windowContent);
-    this.infowindow.open(this, childProps);
+  handleToggleOpen = event => {
+    this.setState({
+      isOpen: true
+    });
+    console.log(event);
+  };
+
+  handleToggleClose = () => {
+    this.setState({
+      isOpen: false
+    });
   };
 
   getLocations(locations) {
-    this.setState({ locations });
+    this.setState({
+      locations
+    });
   }
 
   componentDidMount() {
@@ -72,7 +77,7 @@ class CruiseMap extends Component {
           defaultZoom={4.8}
           options={mapOptions}
           yesIWantToUseGoogleMapApiInternals={true}
-          onChildClick={this._onChildClick}
+          onChildClick={event => this.handleToggleOpen()}
         >
           {this.state.locations.map(location => (
             <LocationMarkerComponent
@@ -81,8 +86,18 @@ class CruiseMap extends Component {
               lng={location.position.lng}
               text={location.name}
               location={location}
+              type="marker"
             />
           ))}
+          {this.state.isOpen === true ? (
+            <InfoBox
+              onClick={() => this.handleToggleClose()}
+              lat={this.state.locations[0].position.lat}
+              lng={this.state.locations[0].position.lng}
+              text={this.state.locations[0].name}
+              type="infobox"
+            />
+          ) : null}
         </GoogleMapReact>
       </div>
     );
