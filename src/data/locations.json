@@ -44,10 +44,10 @@
     }
 }, {
     "day": 8,
-    "name": "St. John's Antigua",
+    "name": "St. John's, Antigua",
     "position": {
-        "lat": 12.144349,
-        "lng": -68.265546
+        "lat": 17.1274,
+        "lng": -61.8468
     },
     "hours": {
         "arrival": "8:00AM",
@@ -65,7 +65,7 @@
         "departure": "5:00PM"
     }
 }, {
-    "day": 12,
+    "day": 13,
     "name": "Cape Liberty, New Jersey",
     "position": {
         "lat": 40.664873,

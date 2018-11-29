@@ -7,10 +7,9 @@ import { faMapMarker } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 library.add(fab, faMapMarker);
-const LocationMarkerComponent = ({ key }) => (
+const LocationMarkerComponent = ({ day, classes }) => (
   <div className="marker-text">
-    <FontAwesomeIcon className="map-icon fa-3x" icon="map-marker" />
-    <span>{key}</span>
+    <FontAwesomeIcon className={classes} icon="map-marker" />
   </div>
 );
 
@@ -33,12 +32,11 @@ class CruiseMap extends Component {
     key = parseInt(key);
     if (key !== this.state.selectedDay) {
       this.selectLocation(key);
-      console.log(key);
-      console.log(this.state.selectedDay);
       this.setState({
         isOpen: true,
         selectedDay: key
       });
+      this.toggleMapIcon();
     } else {
       this.setState({ isOpen: false, selectedDay: -1 });
     }
@@ -50,14 +48,17 @@ class CruiseMap extends Component {
     });
   };
 
+  /* function to animate the markers */
+  toggleMapIcon() {
+    document.body.classList.toggle(".map-icon-active");
+  }
+
   selectLocation(day) {
     day = parseInt(day);
     if (day) {
       let location = this.state.locations.filter(
         location => location.day === day
       );
-      console.log(this.state.locations[6].day);
-      console.log(day);
       if (location.length > 0) {
         this.setState({
           selectedLocation: location[0]
@@ -89,7 +90,6 @@ class CruiseMap extends Component {
           bootstrapURLKeys={{
             key: "AIzaSyDD48Kq168GX4Ok_CncdLtgIRtvFIiwle0"
           }}
-          onGoogleApiLoaded={this.onGoogleApiLoaded}
           defaultCenter={{
             lat: 27.504497,
             lng: -69.825955
@@ -101,13 +101,21 @@ class CruiseMap extends Component {
         >
           {this.state.locations.map(location => (
             <LocationMarkerComponent
-              key={parseInt(location.day)}
+              key={location.day}
+              day={location.day}
               lat={location.position.lat}
               lng={location.position.lng}
               text={location.name}
               location={location}
+              classes={
+                this.state.isOpen === true &&
+                location.day === this.state.selectedDay
+                  ? "map-icon map-icon-active fa-4x"
+                  : "map-icon fa-3x"
+              }
             />
           ))}
+
           {this.state.isOpen === true ? (
             <InfoBox
               key={-1}
