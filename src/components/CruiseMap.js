@@ -13,7 +13,7 @@ const LocationMarkerComponent = ({ key }) => (
   </div>
 );
 
-const InfoBox = () => <div>Hi ho!</div>;
+const InfoBox = ({ infoContent }) => <div>{infoContent}</div>;
 
 const mapOptions = {
   styles: mapstyle,
@@ -36,16 +36,16 @@ class CruiseMap extends Component {
 
   _onChildClick = key => {
     key = parseInt(key);
-    if (key !== -1) {
+    if (key !== this.state.selectedDay) {
       this.selectLocation(key);
       console.log(key);
-      console.log(this.state.selectedLocation);
+      console.log(this.state.selectedDay);
       this.setState({
         isOpen: true,
         selectedDay: key
       });
     } else {
-      this.setState({ isOpen: false });
+      this.setState({ isOpen: false, selectedDay: -1 });
     }
   };
 
@@ -65,7 +65,7 @@ class CruiseMap extends Component {
       console.log(day);
       if (location.length > 0) {
         this.setState({
-          selectedLocation: location
+          selectedLocation: location[0]
         });
       }
     }
@@ -107,12 +107,11 @@ class CruiseMap extends Component {
         >
           {this.state.locations.map(location => (
             <LocationMarkerComponent
-              key={location.day}
+              key={parseInt(location.day)}
               lat={location.position.lat}
               lng={location.position.lng}
               text={location.name}
               location={location}
-              type="marker"
             />
           ))}
           {this.state.isOpen === true ? (
@@ -121,8 +120,19 @@ class CruiseMap extends Component {
               onClick={() => this.handleToggleClose()}
               lat={this.state.selectedLocation.position.lat}
               lng={this.state.selectedLocation.position.lng}
-              text={this.state.selectedLocation.name}
-              type="infobox"
+              infoContent={
+                <div className="info-content">
+                  <h2>{this.state.selectedLocation.name}</h2>
+                  <ul>
+                    <li>
+                      Arrival: {this.state.selectedLocation.hours.arrival}
+                    </li>
+                    <li>
+                      Departure: {this.state.selectedLocation.hours.departure}
+                    </li>
+                  </ul>
+                </div>
+              }
             />
           ) : null}
         </GoogleMapReact>
