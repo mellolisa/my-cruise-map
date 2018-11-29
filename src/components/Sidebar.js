@@ -28,8 +28,8 @@ class Sidebar extends Component {
             </div>
           ))}
           <div className="filters">
-            <button className="filter-button">Start and End Ports</button>
             <button className="filter-button">Continental US</button>
+            <button className="filter-button">Eastern Caribbean</button>
             <button className="filter-button">ABC Islands</button>
           </div>
         </nav>
