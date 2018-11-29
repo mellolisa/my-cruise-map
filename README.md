@@ -51,3 +51,6 @@ https://hackernoon.com/implement-google-maps-in-reactjs-5bc218074689
 
 Google-map-react Library
 https://github.com/google-map-react
+
+Hints for infobox trianlge
+http://michaelsoriano.com/customize-google-map-info-windows-infobox/

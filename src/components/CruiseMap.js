@@ -8,8 +8,9 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 library.add(fab, faMapMarker);
 const LocationMarkerComponent = ({ key }) => (
-  <div key={key} className="marker-text">
+  <div className="marker-text">
     <FontAwesomeIcon className="map-icon fa-3x" icon="map-marker" />
+    <span>{key}</span>
   </div>
 );
 
@@ -26,12 +27,6 @@ class CruiseMap extends Component {
     isOpen: false,
     selectedDay: 1,
     selectedLocation: this.props.locations[0]
-  };
-
-  onGoogleApiLoaded = ({ map, maps }) => {
-    this.map = map;
-    this.maps = maps;
-    console.log(this);
   };
 
   _onChildClick = key => {
@@ -82,7 +77,6 @@ class CruiseMap extends Component {
   }
 
   render() {
-    console.log(this.state.locations);
     return (
       // Important! Always set the container height explicitly
       <div
@@ -121,8 +115,9 @@ class CruiseMap extends Component {
               lat={this.state.selectedLocation.position.lat}
               lng={this.state.selectedLocation.position.lng}
               infoContent={
-                <div className="info-content">
-                  <h2>{this.state.selectedLocation.name}</h2>
+                <div className="infoBox">
+                  <h2>Day {this.state.selectedLocation.day}</h2>
+                  <h3>{this.state.selectedLocation.name}</h3>
                   <ul>
                     <li>
                       Arrival: {this.state.selectedLocation.hours.arrival}

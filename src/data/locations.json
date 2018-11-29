@@ -6,7 +6,7 @@
         "lng": -80.2156073
     },
     "hours": {
-        "arrival": "-",
+        "arrival": "N/A",
         "departure": "5:30PM"
     }
 }, {
@@ -73,6 +73,6 @@
     },
     "hours": {
         "arrival": "6:00AM",
-        "departure": "-"
+        "departure": "N/A"
     }
 }]
