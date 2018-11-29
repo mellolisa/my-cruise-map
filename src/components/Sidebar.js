@@ -22,11 +22,16 @@ class Sidebar extends Component {
           <h1> My Cruise Ports </h1>
           {this.props.locations.map(location => (
             <div className="links" key={location.day}>
-              <a href="/">
+              <button className="link-item">
                 Day {location.day} - {location.name}
-              </a>
+              </button>
             </div>
           ))}
+          <div className="filters">
+            <button className="filter-button">Start and End Ports</button>
+            <button className="filter-button">Continental US</button>
+            <button className="filter-button">ABC Islands</button>
+          </div>
         </nav>
       </div>
     );

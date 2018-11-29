@@ -11,12 +11,19 @@ class App extends Component {
       lon: -70.021
     },
     zoom: 5,
-    locations: locations
+    locations: locations,
+    selectedDay: -1
   };
 
   getLocations() {
-    this.setState({ locations });
+    this.setState({
+      locations
+    });
   }
+
+  _onChildClick = key => {
+    console.log(key);
+  };
 
   componentDidMount() {
     this.getLocations();
@@ -25,16 +32,19 @@ class App extends Component {
   render() {
     return (
       <div className="App">
-        <Sidebar locations={this.state.locations} /> {/* Main Page */}{" "}
+        <Sidebar
+          locations={this.state.locations}
+          onChildClick={this._onChildClick}
+        />
         <main className="main">
           <section id="map">
             <CruiseMap
               center={this.state.center}
               zoom={this.state.zoom}
               locations={this.state.locations}
-            />{" "}
-          </section>{" "}
-        </main>{" "}
+            />
+          </section>
+        </main>
       </div>
     );
   }

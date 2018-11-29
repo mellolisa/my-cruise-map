@@ -24,7 +24,7 @@ class CruiseMap extends Component {
   state = {
     locations: this.props.locations,
     isOpen: false,
-    selectedDay: 1,
+    selectedDay: this.props.selectedDay,
     selectedLocation: this.props.locations[0]
   };
 
