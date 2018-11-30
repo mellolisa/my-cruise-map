@@ -84,8 +84,9 @@ class CruiseMap extends Component {
                     </li>
                   </ul>
                   <div className="weather">
-                    Current Condition:
-                    {this.props.weather.data.request.type}
+                    Sunrise:
+                    {console.log(this.props.weather)}
+                    {this.props.weather.data.weather[0].astronomy[0].sunrise}
                   </div>
                 </div>
               }

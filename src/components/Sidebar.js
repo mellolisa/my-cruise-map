@@ -2,6 +2,19 @@ import React, { Component } from "react";
 import "../App.css";
 
 class Sidebar extends Component {
+  _onClick = e => {
+    console.log("I'm here!");
+    let tag = e.target.id;
+    console.log(tag.indexOf("a"));
+    /* If the tag starts with a, call the filter function.  Otherwise, toggle the marker infoBox. */
+    if (tag.indexOf("a") === 0) {
+      let newTag = tag.slice(1);
+      console.log(newTag);
+      this.props.myfilter(newTag);
+    } else {
+      this.props.handleClick(tag);
+    }
+  };
   /* function to toggle the sidebar */
   toggleSidenav() {
     document.body.classList.toggle("sidenav-active");
@@ -22,15 +35,54 @@ class Sidebar extends Component {
           <h1> My Cruise Ports </h1>
           {this.props.locations.map(location => (
             <div className="links" key={location.day}>
-              <button className="link-item">
+              <button
+                id={location.day}
+                className="link-item"
+                onClick={this._onClick}
+              >
                 Day {location.day} - {location.name}
               </button>
             </div>
           ))}
           <div className="filters">
-            <button className="filter-button">Continental US</button>
-            <button className="filter-button">Eastern Caribbean</button>
-            <button className="filter-button">ABC Islands</button>
+            <button
+              className="filter-button"
+              id="acontinental"
+              onClick={this._onClick}
+              myfilter={this.props.filterLocations}
+            >
+              Continental US
+            </button>
+            <button
+              className="filter-button"
+              id="aeastern"
+              onClick={this._onClick}
+              myfilter={this.props.filterLocations}
+            >
+              Eastern Caribbean
+            </button>
+            <button
+              className="filter-button"
+              id="aabc"
+              onClick={this._onClick}
+              myfilter={this.props.filterLocations}
+            >
+              ABC Islands
+            </button>
+            <button
+              className="filter-button"
+              id="a"
+              onClick={this._onClick}
+              myfilter={this.props.filterLocations}
+            >
+              All Locations
+            </button>
+          </div>
+          <div className="disclaimer">
+            Weather info provided by{" "}
+            <a href="https://www.worldweatheronline.com">
+              World Weather Online!
+            </a>
           </div>
         </nav>
       </div>
