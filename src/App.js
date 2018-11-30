@@ -89,7 +89,7 @@ class App extends Component {
 
   render() {
     return (
-      <div className="App" aria-label="Application">
+      <article className="App" aria-labelledby="Application">
         <Sidebar
           allLocations={this.state.allLocations}
           locations={this.state.locations}
@@ -115,7 +115,7 @@ class App extends Component {
             />
           </section>
         </main>
-      </div>
+      </article>
     );
   }
 }
