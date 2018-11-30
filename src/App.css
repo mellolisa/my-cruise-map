@@ -190,7 +190,7 @@ nav h1 {
     text-align: left;
 }
 
-footer {
-    text-align: right;
-    z-index: 9999;
+.disclaimer {
+    text-align: center;
+    font-size: 8pt
 }

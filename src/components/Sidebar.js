@@ -77,7 +77,7 @@ class Sidebar extends Component {
             </button>
           </div>
           <div className="disclaimer">
-            Sunrise / Sunset data provided by
+            Sunrise / Sunset data provided by <br />
             <a href="https://www.worldweatheronline.com">
               World Weather Online!
             </a>
