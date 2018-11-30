@@ -22,7 +22,6 @@ const mapOptions = {
 
 class CruiseMap extends Component {
   _onChildClick = key => {
-    console.log(key);
     let day = parseInt(key);
     this.props.markerCallBack(day);
   };

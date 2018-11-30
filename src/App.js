@@ -76,25 +76,20 @@ class App extends Component {
   }
 
   callWeatherAPI = name => {
-    console.log(name);
     weatherAPI.get(encodeURIComponent(name)).then(res => {
-      this.setState(
-        {
-          allLocationWeather: [...this.state.allLocationWeather, res]
-        },
-        () => console.log(this.state.allLocationWeather) // check the console for this line in your code and inspect allLocationWeather in state
-      );
+      this.setState({
+        allLocationWeather: [...this.state.allLocationWeather, res]
+      });
     });
   };
 
   componentDidMount() {
     this.getWeatherInfo();
-    console.log(this.state);
   }
 
   render() {
     return (
-      <div className="App">
+      <div className="App" aria-label="Application">
         <Sidebar
           allLocations={this.state.allLocations}
           locations={this.state.locations}
@@ -106,7 +101,7 @@ class App extends Component {
           handleClick={this.handleClick}
         />
         <main className="main">
-          <section id="map">
+          <section id="map" aria-label="map">
             <CruiseMap
               center={this.state.center}
               zoom={this.state.zoom}

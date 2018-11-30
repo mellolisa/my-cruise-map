@@ -32,7 +32,7 @@ class Sidebar extends Component {
         <nav>
           <h1> My Cruise Ports </h1>
           {this.props.locations.map(location => (
-            <div className="links" key={location.day}>
+            <div className="links" aria-label="list-view" key={location.day}>
               <button
                 id={location.day}
                 className="link-item"
