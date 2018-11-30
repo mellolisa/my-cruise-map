@@ -69,28 +69,27 @@ class App extends Component {
     });
   };
 
+  /* Thank you to coach @drunkenkismet  */
+
   getWeatherInfo() {
-    let allLocationWeather = [];
-    this.state.allLocations.map(location =>
-      allLocationWeather.push(this.callWeatherAPI(location.name))
-    );
-
-    this.setState({ allLocationWeather: allLocationWeather });
-    console.log(this.state);
+    this.state.allLocations.map(location => this.callWeatherAPI(location.name));
   }
 
-  callWeatherAPI(name) {
-    let singleLocationWeather = {};
-    weatherAPI
-      .get(encodeURIComponent(name))
-      .then(data => (singleLocationWeather = data));
-    console.log(singleLocationWeather);
-    console.log("here!");
-    return singleLocationWeather;
-  }
+  callWeatherAPI = name => {
+    console.log(name);
+    weatherAPI.get(encodeURIComponent(name)).then(res => {
+      this.setState(
+        {
+          allLocationWeather: [...this.state.allLocationWeather, res]
+        },
+        () => console.log(this.state.allLocationWeather) // check the console for this line in your code and inspect allLocationWeather in state
+      );
+    });
+  };
 
   componentDidMount() {
     this.getWeatherInfo();
+    console.log(this.state);
   }
 
   render() {
@@ -117,7 +116,7 @@ class App extends Component {
               isOpen={this.state.isOpen}
               selectedDay={this.state.selectedDay}
               selectedLocation={this.state.selectedLocation}
-              selectedLocationWeather={this.state.selectedLocationWeather}
+              allLocationWeather={this.state.allLocationWeather}
             />
           </section>
         </main>

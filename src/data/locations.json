@@ -10,4 +10,76 @@
         "departure": "5:30PM"
     },
     "tags": "continental"
+}, {
+    "day": 4,
+    "name": "Oranjestad, Aruba",
+    "position": {
+        "lat": 12.509204,
+        "lng": -70.008631
+    },
+    "hours": {
+        "arrival": "8:00AM",
+        "departure": "5:00PM"
+    },
+    "tags": "abc"
+}, {
+    "day": 5,
+    "name": "Willemstad, Curacao",
+    "position": {
+        "lat": 12.122422,
+        "lng": -68.882423
+    },
+    "hours": {
+        "arrival": "8:00AM",
+        "departure": "5:00PM"
+    },
+    "tags": "abc"
+}, {
+    "day": 6,
+    "name": "Kralendijk, Bonaire",
+    "position": {
+        "lat": 12.144349,
+        "lng": -68.265546
+    },
+    "hours": {
+        "arrival": "8:00AM",
+        "departure": "5:00PM"
+    },
+    "tags": "abc"
+}, {
+    "day": 8,
+    "name": "St. John's, Antigua",
+    "position": {
+        "lat": 17.1274,
+        "lng": -61.8468
+    },
+    "hours": {
+        "arrival": "8:00AM",
+        "departure": "5:00PM"
+    },
+    "tags": "eastern"
+}, {
+    "day": 9,
+    "name": "Charlotte Amalie, St. Thomas",
+    "position": {
+        "lat": 18.3419,
+        "lng": -64.930701
+    },
+    "hours": {
+        "arrival": "8:00AM",
+        "departure": "5:00PM"
+    },
+    "tags": "eastern"
+}, {
+    "day": 13,
+    "name": "Cape Liberty, New Jersey",
+    "position": {
+        "lat": 40.664873,
+        "lng": -74.072574
+    },
+    "hours": {
+        "arrival": "6:00AM",
+        "departure": "N/A"
+    },
+    "tags": "continental"
 }]

@@ -85,10 +85,21 @@ class CruiseMap extends Component {
                   </ul>
                   <div className="weather">
                     Sunrise:
-                    {console.log(this.props.weather)}
                     {
-                      this.props.allLocationWeather[this.props.day].data
-                        .weather[0].astronomy[0].sunrise
+                      this.props.allLocationWeather[
+                        this.props.locations.findIndex(
+                          x => x.day === this.props.selectedDay
+                        )
+                      ].data.weather[0].astronomy[0].sunrise
+                    }
+                    <br />
+                    Sunset:
+                    {
+                      this.props.allLocationWeather[
+                        this.props.locations.findIndex(
+                          x => x.day === this.props.selectedDay
+                        )
+                      ].data.weather[0].astronomy[0].sunset
                     }
                   </div>
                 </div>
