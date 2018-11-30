@@ -21,61 +21,11 @@ const mapOptions = {
 };
 
 class CruiseMap extends Component {
-  state = {
-    locations: this.props.locations,
-    isOpen: false,
-    selectedDay: this.props.selectedDay,
-    selectedLocation: this.props.locations[0]
-  };
-
   _onChildClick = key => {
-    key = parseInt(key);
-    if (key !== this.state.selectedDay) {
-      this.selectLocation(key);
-      this.setState({
-        isOpen: true,
-        selectedDay: key
-      });
-      this.toggleMapIcon();
-    } else {
-      this.setState({ isOpen: false, selectedDay: -1 });
-    }
+    console.log(key);
+    let day = parseInt(key);
+    this.props.markerCallBack(day);
   };
-
-  handleToggleClose = () => {
-    this.setState({
-      isOpen: false
-    });
-  };
-
-  /* function to animate the markers */
-  toggleMapIcon() {
-    document.body.classList.toggle(".map-icon-active");
-  }
-
-  selectLocation(day) {
-    day = parseInt(day);
-    if (day) {
-      let location = this.state.locations.filter(
-        location => location.day === day
-      );
-      if (location.length > 0) {
-        this.setState({
-          selectedLocation: location[0]
-        });
-      }
-    }
-  }
-
-  getLocations(locations) {
-    this.setState({
-      locations
-    });
-  }
-
-  componentDidMount() {
-    this.getLocations(this.props.locations);
-  }
 
   render() {
     return (
@@ -99,7 +49,7 @@ class CruiseMap extends Component {
           yesIWantToUseGoogleMapApiInternals={true}
           onChildClick={this._onChildClick}
         >
-          {this.state.locations.map(location => (
+          {this.props.locations.map(location => (
             <LocationMarkerComponent
               key={location.day}
               day={location.day}
@@ -108,30 +58,29 @@ class CruiseMap extends Component {
               text={location.name}
               location={location}
               classes={
-                this.state.isOpen === true &&
-                location.day === this.state.selectedDay
+                this.props.isOpen === true &&
+                location.day === this.props.selectedDay
                   ? "map-icon map-icon-active fa-4x"
                   : "map-icon fa-3x"
               }
             />
           ))}
 
-          {this.state.isOpen === true ? (
+          {this.props.isOpen === true ? (
             <InfoBox
               key={-1}
-              onClick={() => this.handleToggleClose()}
-              lat={this.state.selectedLocation.position.lat}
-              lng={this.state.selectedLocation.position.lng}
+              lat={this.props.selectedLocation.position.lat}
+              lng={this.props.selectedLocation.position.lng}
               infoContent={
                 <div className="infoBox">
-                  <h2>Day {this.state.selectedLocation.day}</h2>
-                  <h3>{this.state.selectedLocation.name}</h3>
+                  <h2>Day {this.props.selectedLocation.day}</h2>
+                  <h3>{this.props.selectedLocation.name}</h3>
                   <ul>
                     <li>
-                      Arrival: {this.state.selectedLocation.hours.arrival}
+                      Arrival: {this.props.selectedLocation.hours.arrival}
                     </li>
                     <li>
-                      Departure: {this.state.selectedLocation.hours.departure}
+                      Departure: {this.props.selectedLocation.hours.departure}
                     </li>
                   </ul>
                 </div>
