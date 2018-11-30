@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import Sidebar from "./components/Sidebar.js";
 import "./App.css";
 import locations from "./data/locations.json";
+import weather_info from "./data/weather_mock.json";
 import CruiseMap from "./components/CruiseMap.js";
 
 class App extends Component {
@@ -15,11 +16,12 @@ class App extends Component {
       },
       zoom: 5,
       locations: locations,
-      selectedDay: 13,
+      selectedDay: -1,
       filteredLocations: locations,
       selectedFilter: "",
-      isOpen: true,
-      selectedLocation: locations[0]
+      isOpen: false,
+      selectedLocation: locations[0],
+      weather: weather_info
     };
   }
 
@@ -32,6 +34,7 @@ class App extends Component {
         isOpen: true,
         selectedDay: day
       });
+      console.log(this.state);
     } else {
       this.setState({ isOpen: false, selectedDay: -1 });
     }
@@ -62,7 +65,7 @@ class App extends Component {
       <div className="App">
         <Sidebar
           locations={this.state.locations}
-          sidebarCallBack={() => this.handleClick()}
+          sidebarCallBack={this.handleClick}
         />
         <main className="main">
           <section id="map">
@@ -70,7 +73,11 @@ class App extends Component {
               center={this.state.center}
               zoom={this.state.zoom}
               locations={this.state.locations}
-              markerCallBack={day => this.handleClick(day)}
+              markerCallBack={this.handleClick}
+              isOpen={this.state.isOpen}
+              selectedDay={this.state.selectedDay}
+              selectedLocation={this.state.selectedLocation}
+              weather={this.state.weather}
             />
           </section>
         </main>

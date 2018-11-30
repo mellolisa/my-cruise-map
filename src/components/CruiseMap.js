@@ -68,7 +68,7 @@ class CruiseMap extends Component {
 
           {this.props.isOpen === true ? (
             <InfoBox
-              key={-1}
+              key={this.props.day}
               lat={this.props.selectedLocation.position.lat}
               lng={this.props.selectedLocation.position.lng}
               infoContent={
@@ -83,6 +83,10 @@ class CruiseMap extends Component {
                       Departure: {this.props.selectedLocation.hours.departure}
                     </li>
                   </ul>
+                  <div className="weather">
+                    Current Condition:
+                    {this.props.weather.data.request.type}
+                  </div>
                 </div>
               }
             />
