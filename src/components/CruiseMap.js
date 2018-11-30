@@ -9,7 +9,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 library.add(fab, faMapMarker);
 const LocationMarkerComponent = ({ day, classes }) => (
   <div className="marker-text">
-    <FontAwesomeIcon className={classes} icon="map-marker" />
+    <FontAwesomeIcon className={classes} icon="map-marker" tabIndex="1" />
   </div>
 );
 
@@ -86,7 +86,10 @@ class CruiseMap extends Component {
                   <div className="weather">
                     Sunrise:
                     {console.log(this.props.weather)}
-                    {this.props.weather.data.weather[0].astronomy[0].sunrise}
+                    {
+                      this.props.selectedLocationWeather.data.weather[0]
+                        .astronomy[0].sunrise
+                    }
                   </div>
                 </div>
               }

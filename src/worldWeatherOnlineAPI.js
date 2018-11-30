@@ -6,8 +6,8 @@ const headers = {
 }
 
 export const get = (name) =>
-    fetch(`${api}/q=${name}&num_of_days=1&format=json`, {
+    fetch(`${api}&q=${name}&num_of_days=1&format=json`, {
         headers
     })
     .then(res => res.json())
-    .then(data => data.locationName)
+    .then(data => data.selectedLocationWeather)

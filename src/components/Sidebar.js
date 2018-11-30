@@ -3,13 +3,10 @@ import "../App.css";
 
 class Sidebar extends Component {
   _onClick = e => {
-    console.log("I'm here!");
     let tag = e.target.id;
-    console.log(tag.indexOf("a"));
     /* If the tag starts with a, call the filter function.  Otherwise, toggle the marker infoBox. */
     if (tag.indexOf("a") === 0) {
       let newTag = tag.slice(1);
-      console.log(newTag);
       this.props.myfilter(newTag);
     } else {
       this.props.handleClick(tag);
@@ -25,6 +22,7 @@ class Sidebar extends Component {
       <div>
         {/* Hamburger menu */}
         <div
+          tabIndex="0"
           className="hamburger"
           id="hamburger"
           onClick={event => this.toggleSidenav(event)}
@@ -79,7 +77,7 @@ class Sidebar extends Component {
             </button>
           </div>
           <div className="disclaimer">
-            Weather info provided by{" "}
+            Sunrise / Sunset data provided by
             <a href="https://www.worldweatheronline.com">
               World Weather Online!
             </a>

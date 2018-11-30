@@ -3,6 +3,7 @@ import Sidebar from "./components/Sidebar.js";
 import "./App.css";
 import locations from "./data/locations.json";
 import weather_info from "./data/weather_mock.json";
+import * as weatherAPI from "./worldWeatherOnlineAPI.js";
 import CruiseMap from "./components/CruiseMap.js";
 
 class App extends Component {
@@ -22,13 +23,13 @@ class App extends Component {
       isOpen: false,
       selectedLocation: locations[0],
       selectedDay: -1,
-      weather: weather_info
+      weather: weather_info,
+      selectedLocationWeather: weather_info
     };
   }
 
   handleClick(day) {
     day = parseInt(day);
-    console.log("we're in here!");
 
     if (day !== this.state.selectedDay) {
       this.selectLocation(day);
@@ -36,7 +37,6 @@ class App extends Component {
         isOpen: true,
         selectedDay: day
       });
-      console.log(this.state);
     } else {
       this.setState({ isOpen: false, selectedDay: -1 });
     }
@@ -57,12 +57,10 @@ class App extends Component {
   }
 
   filterlocations = tag => {
-    console.log("Here!");
     let locations = this.state.allLocations.filter(location =>
       location.tags.includes(tag)
     );
     this.setState({ locations: locations, selectedFilter: tag, isOpen: false });
-    console.log(tag);
   };
 
   handleToggleClose = () => {
@@ -70,8 +68,16 @@ class App extends Component {
       isOpen: false
     });
   };
+  /*
+  getWeatherInfo() {
+    let allLocationWeather = {};
+    this.state.allLocations.map(location => (
+      weatherAPI.get(encodeURIComponent(Location.name)).then(result => {
+      allLocationWeather.push(result) }))}
+ */
 
   render() {
+    /* this.getWeatherInfo(); */
     return (
       <div className="App">
         <Sidebar
@@ -95,7 +101,7 @@ class App extends Component {
               isOpen={this.state.isOpen}
               selectedDay={this.state.selectedDay}
               selectedLocation={this.state.selectedLocation}
-              weather={this.state.weather}
+              selectedLocationWeather={this.state.selectedLocationWeather}
             />
           </section>
         </main>
