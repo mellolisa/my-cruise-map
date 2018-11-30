@@ -87,8 +87,8 @@ class CruiseMap extends Component {
                     Sunrise:
                     {console.log(this.props.weather)}
                     {
-                      this.props.selectedLocationWeather.data.weather[0]
-                        .astronomy[0].sunrise
+                      this.props.allLocationWeather[this.props.day].data
+                        .weather[0].astronomy[0].sunrise
                     }
                   </div>
                 </div>

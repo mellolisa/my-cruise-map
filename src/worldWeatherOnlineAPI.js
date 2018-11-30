@@ -10,4 +10,4 @@ export const get = (name) =>
         headers
     })
     .then(res => res.json())
-    .then(data => data.selectedLocationWeather)
+    .then(data => data.weatherApi)

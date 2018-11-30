@@ -24,7 +24,7 @@ class App extends Component {
       selectedLocation: locations[0],
       selectedDay: -1,
       weather: weather_info,
-      selectedLocationWeather: weather_info
+      allLocationWeather: []
     };
   }
 
@@ -68,16 +68,32 @@ class App extends Component {
       isOpen: false
     });
   };
-  /*
+
   getWeatherInfo() {
-    let allLocationWeather = {};
-    this.state.allLocations.map(location => (
-      weatherAPI.get(encodeURIComponent(Location.name)).then(result => {
-      allLocationWeather.push(result) }))}
- */
+    let allLocationWeather = [];
+    this.state.allLocations.map(location =>
+      allLocationWeather.push(this.callWeatherAPI(location.name))
+    );
+
+    this.setState({ allLocationWeather: allLocationWeather });
+    console.log(this.state);
+  }
+
+  callWeatherAPI(name) {
+    let singleLocationWeather = {};
+    weatherAPI
+      .get(encodeURIComponent(name))
+      .then(data => (singleLocationWeather = data));
+    console.log(singleLocationWeather);
+    console.log("here!");
+    return singleLocationWeather;
+  }
+
+  componentDidMount() {
+    this.getWeatherInfo();
+  }
 
   render() {
-    /* this.getWeatherInfo(); */
     return (
       <div className="App">
         <Sidebar
