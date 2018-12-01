@@ -10,4 +10,9 @@ export const get = name =>
         headers
     })
     .then(res => res.json())
-    .then(data => data);
+    .then(data => data)
+    .then(data => console.log(data))
+    .catch(function(error) {
+        console.log("Error loading weather data!");
+        return error;
+    });
