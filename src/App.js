@@ -24,7 +24,8 @@ class App extends Component {
       selectedLocation: locations[0],
       selectedDay: -1,
       weather: weather_info,
-      allLocationWeather: []
+      allLocationWeather: [],
+      gotWeather: 1
     };
   }
 
@@ -69,6 +70,10 @@ class App extends Component {
     });
   };
 
+  setGotWeather() {
+    this.setState({ gotWeather: 0 });
+  }
+
   /* Thank you to coach @drunkenkismet  */
 
   getWeatherInfo() {
@@ -76,7 +81,7 @@ class App extends Component {
   }
 
   callWeatherAPI = name => {
-    weatherAPI.get(encodeURIComponent(name)).then(res => {
+    weatherAPI.get(encodeURIComponent(name), this.setGotWeather).then(res => {
       this.setState({
         allLocationWeather: [...this.state.allLocationWeather, res]
       });
@@ -85,6 +90,7 @@ class App extends Component {
 
   componentDidMount() {
     this.getWeatherInfo();
+    console.log(this.state);
   }
 
   render() {
@@ -112,6 +118,7 @@ class App extends Component {
               selectedDay={this.state.selectedDay}
               selectedLocation={this.state.selectedLocation}
               allLocationWeather={this.state.allLocationWeather}
+              gotWeather={this.state.gotWeather}
             />
           </section>
         </main>
