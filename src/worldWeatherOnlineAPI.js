@@ -1,13 +1,12 @@
-/*
 const api =
     "http://api.worldweatheronline.com/premium/v1/weather.ashx?key=6813e0a49ba743e781343727183011";
 
-*/
 
-/* Test Broken API */
+
+/* Test Broken API 
 const api =
     "http://api.worldweatheronline.com/premium/v1/weather.ashx?key=6e0a49ba743e781343727183011";
-
+*/
 
 
 const headers = {
@@ -29,6 +28,11 @@ export const get = (name, callBack) =>
         console.log("Error loading weather data!");
         callBack(error);
         console.log(callBack);
+
+        //Put the disable flag in session storage because I honestly have no idea how else to do this!
+        sessionStorage.setItem('weatherFlag', 0);
+
+
 
         return error;
     });

@@ -25,7 +25,7 @@ class App extends Component {
       selectedDay: -1,
       weather: weather_info,
       allLocationWeather: [],
-      gotWeather: 0
+      gotWeather: 1
     };
   }
 
@@ -71,7 +71,7 @@ class App extends Component {
   };
 
   alertOnError(error) {
-    if (error) throw error;
+    console.log(error);
   }
 
   /* Thank you to coach @drunkenkismet  */
@@ -81,16 +81,11 @@ class App extends Component {
   }
 
   callWeatherAPI = name => {
-    weatherAPI
-      .get(encodeURIComponent(name), this.alertOnError)
-      .then(res => {
-        this.setState({
-          allLocationWeather: [...this.state.allLocationWeather, res]
-        });
-      })
-      .catch(function(error) {
-        this.setState({ gotWeather: 0 });
+    weatherAPI.get(encodeURIComponent(name), this.alertOnError).then(res => {
+      this.setState({
+        allLocationWeather: [...this.state.allLocationWeather, res]
       });
+    });
   };
 
   componentDidMount() {

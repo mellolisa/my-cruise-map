@@ -76,7 +76,7 @@ class Sidebar extends Component {
               All Locations
             </button>
           </div>
-          {this.props.gotWeather ? (
+          {!sessionStorage.getItem("weatherFlag") ? (
             <div className="disclaimer">
               Sunrise / Sunset data provided by <br />
               <a href="https://www.worldweatheronline.com">

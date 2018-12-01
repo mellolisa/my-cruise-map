@@ -84,7 +84,7 @@ class CruiseMap extends Component {
                   </ul>
                   <div className="weather">
                     Sunrise:
-                    {this.props.gotWeather
+                    {!sessionStorage.getItem("weatherFlag")
                       ? this.props.allLocationWeather[
                           this.props.locations.findIndex(
                             x => x.day === this.props.selectedDay
@@ -93,7 +93,7 @@ class CruiseMap extends Component {
                       : "N/A"}
                     <br />
                     Sunset:
-                    {this.props.gotWeather
+                    {!sessionStorage.getItem("weatherFlag")
                       ? this.props.allLocationWeather[
                           this.props.locations.findIndex(
                             x => x.day === this.props.selectedDay
