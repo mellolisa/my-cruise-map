@@ -14,7 +14,7 @@ const headers = {
     Accept: "application/json"
 };
 
-export const get = (name, callBack = this.props.setGotWeather) =>
+export const get = (name, callBack) =>
     fetch(`${api}&q=${name}&num_of_days=1&format=json`, {
         headers
     })
@@ -23,10 +23,12 @@ export const get = (name, callBack = this.props.setGotWeather) =>
             return res.json();
         } else {
             console.log(res.error);
-            this.props.setGotWeather();
         }
     })
     .catch(function(error) {
         console.log("Error loading weather data!");
+        callBack();
+        console.log(callBack);
+
         return error;
     });
