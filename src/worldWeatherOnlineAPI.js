@@ -27,7 +27,7 @@ export const get = (name, callBack) =>
     })
     .catch(function(error) {
         console.log("Error loading weather data!");
-        callBack();
+        callBack(error);
         console.log(callBack);
 
         return error;

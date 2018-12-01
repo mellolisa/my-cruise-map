@@ -76,12 +76,22 @@ class Sidebar extends Component {
               All Locations
             </button>
           </div>
-          <div className="disclaimer">
-            Sunrise / Sunset data provided by <br />
-            <a href="https://www.worldweatheronline.com">
-              World Weather Online!
-            </a>
-          </div>
+          {this.props.gotWeather ? (
+            <div className="disclaimer">
+              Sunrise / Sunset data provided by <br />
+              <a href="https://www.worldweatheronline.com">
+                World Weather Online!
+              </a>
+            </div>
+          ) : (
+            <div className="disclaimer">
+              Sunrise and Sunset data from{" "}
+              <a href="https://www.worldweatheronline.com">
+                World Weather Online
+              </a>
+              not available.
+            </div>
+          )}
         </nav>
       </div>
     );

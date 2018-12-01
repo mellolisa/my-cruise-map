@@ -25,7 +25,7 @@ class App extends Component {
       selectedDay: -1,
       weather: weather_info,
       allLocationWeather: [],
-      gotWeather: 1
+      gotWeather: 0
     };
   }
 
@@ -70,8 +70,8 @@ class App extends Component {
     });
   };
 
-  setGotWeather() {
-    this.setState({ gotWeather: 0 });
+  alertOnError(error) {
+    if (error) throw error;
   }
 
   /* Thank you to coach @drunkenkismet  */
@@ -81,11 +81,16 @@ class App extends Component {
   }
 
   callWeatherAPI = name => {
-    weatherAPI.get(encodeURIComponent(name), this.setGotWeather).then(res => {
-      this.setState({
-        allLocationWeather: [...this.state.allLocationWeather, res]
+    weatherAPI
+      .get(encodeURIComponent(name), this.alertOnError)
+      .then(res => {
+        this.setState({
+          allLocationWeather: [...this.state.allLocationWeather, res]
+        });
+      })
+      .catch(function(error) {
+        this.setState({ gotWeather: 0 });
       });
-    });
   };
 
   componentDidMount() {
@@ -105,6 +110,7 @@ class App extends Component {
           selectedLocation={this.state.selectedLocation}
           myfilter={this.filterlocations}
           handleClick={this.handleClick}
+          gotWeather={this.state.gotWeather}
         />
         <main className="main">
           <section id="map" aria-label="map">
