@@ -5,6 +5,7 @@ import locations from "./data/locations.json";
 import weather_info from "./data/weather_mock.json";
 import * as weatherAPI from "./worldWeatherOnlineAPI.js";
 import CruiseMap from "./components/CruiseMap.js";
+import ErrorBoundary from "./components/ErrorBoundary";
 
 class App extends Component {
   constructor(props) {
@@ -95,35 +96,37 @@ class App extends Component {
 
   render() {
     return (
-      <article className="App" aria-labelledby="Application">
-        <Sidebar
-          allLocations={this.state.allLocations}
-          locations={this.state.locations}
-          onChildClick={this._onChildClick}
-          isOpen={this.state.isOpen}
-          selectedDay={this.state.selectedDay}
-          selectedLocation={this.state.selectedLocation}
-          myfilter={this.filterlocations}
-          handleClick={this.handleClick}
-          gotWeather={this.state.gotWeather}
-        />
-        <main className="main">
-          <section id="map" aria-label="map">
-            <CruiseMap
-              center={this.state.center}
-              zoom={this.state.zoom}
-              allLocations={this.state.allLocations}
-              locations={this.state.locations}
-              markerCallBack={this.handleClick}
-              isOpen={this.state.isOpen}
-              selectedDay={this.state.selectedDay}
-              selectedLocation={this.state.selectedLocation}
-              allLocationWeather={this.state.allLocationWeather}
-              gotWeather={this.state.gotWeather}
-            />
-          </section>
-        </main>
-      </article>
+      <ErrorBoundary>
+        <article className="App" aria-labelledby="Application">
+          <Sidebar
+            allLocations={this.state.allLocations}
+            locations={this.state.locations}
+            onChildClick={this._onChildClick}
+            isOpen={this.state.isOpen}
+            selectedDay={this.state.selectedDay}
+            selectedLocation={this.state.selectedLocation}
+            myfilter={this.filterlocations}
+            handleClick={this.handleClick}
+            gotWeather={this.state.gotWeather}
+          />
+          <main className="main">
+            <section id="map" aria-label="map">
+              <CruiseMap
+                center={this.state.center}
+                zoom={this.state.zoom}
+                allLocations={this.state.allLocations}
+                locations={this.state.locations}
+                markerCallBack={this.handleClick}
+                isOpen={this.state.isOpen}
+                selectedDay={this.state.selectedDay}
+                selectedLocation={this.state.selectedLocation}
+                allLocationWeather={this.state.allLocationWeather}
+                gotWeather={this.state.gotWeather}
+              />
+            </section>
+          </main>
+        </article>
+      </ErrorBoundary>
     );
   }
 }
